@@ -65,7 +65,7 @@ public class Main {
         return data;
     }
 
-    public static void writeFile(ArrayList<String> data, String path){
+    public static void writeFile(ArrayList<String> data, String path) throws Exception{
         PrintWriter out = null;
 
         try {
@@ -75,7 +75,7 @@ public class Main {
                 out.println(x);
             }
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
         } finally {
             //  close the file
             if (out != null) {
@@ -109,7 +109,11 @@ public class Main {
                 addWord(scan, data);
             } else if (input.toLowerCase().equals("n")){
                 System.out.println("Writing to a file.");
-                writeFile(data, path);
+                try {
+                    writeFile(data, path);
+                } catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
                 loop = false;
             } else {
                 System.out.println("Please enter y/n.");
